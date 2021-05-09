@@ -1,8 +1,9 @@
 
 name: Checkstyle Example 
 
+# Does not seem to work when it is on   workflow_dispatch:
 on:
-  workflow_dispatch:
+  push:
 jobs:
   build:
     name: Checkstyler
