@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: jardir
-          key: ${{ runner.os }}-checkstyle
+          key: ${{ runner.os }}-checkstyle-jar
 
       - name: Generate checkstyle jar
         if: steps.cache-checkstyle-jar.outputs.cache-hit != 'true'
