@@ -3,7 +3,11 @@ name: Checkstyle Example
 
 # Does not seem to work when it is on   workflow_dispatch:
 on:
+  #workflow_dispatch: this workflow fails when using workflow_dispatch
   push:
+    paths:
+      # this workflow will only run if a .java file is pushed.
+      - '**.java'
 jobs:
   build:
     name: Checkstyler
