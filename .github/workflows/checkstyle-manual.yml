@@ -15,15 +15,15 @@ jobs:
         with:
           path: jardir
           key: ${{ runner.os }}-checkstyle
-    - name: Generate checkstyle jar
-      if: steps.cache-checkstyle-jar.outputs.cache-hit != 'true'
-      run: |
-        mkdir jardir
-        cd jardir
-        wget --quiet https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.42/checkstyle-8.42-all.jar
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Get jar file for checkstyle
-      run: | 
-        java -jar checkstyle-8.42-all.jar -c /google_checks.xml src/main/java/edu/uwb/App.java 
+      - name: Generate checkstyle jar
+        if: steps.cache-checkstyle-jar.outputs.cache-hit != 'true'
+        run: |
+          mkdir jardir
+          cd jardir
+          wget --quiet https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.42/checkstyle-8.42-all.jar
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get jar file for checkstyle
+        run: | 
+          java -jar checkstyle-8.42-all.jar -c /google_checks.xml src/main/java/edu/uwb/App.java 
 
