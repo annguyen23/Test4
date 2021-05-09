@@ -2,7 +2,7 @@
 name: Checkstyle Example 
 
 on: [push]
-  #workflow_dispatch:
+  #workflow_dispatch: this workflow fails when using workflow_dispatch, [push] might works better
 jobs:
   build:
     name: Checkstyler
