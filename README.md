@@ -16,6 +16,7 @@ Create an artifact that can be downloaded from repository via website or using `
 - upload-artifact.yml
 
 ## Artifact
+![Checkstyle Example](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
 
 Checkstyle action
 
