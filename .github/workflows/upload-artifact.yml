@@ -1,0 +1,30 @@
+
+name: Upload Example
+
+on:
+    workflow_dispatch:
+
+jobs:
+  build:
+    name: Uploader
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+
+      ###########################
+      #          Build          #
+      ###########################
+      - name: Building the artifact
+        run: |
+          mkdir -p build/example
+          date > build/example/current-date.txt
+      
+      ###########################
+      #          Upload         #
+      ###########################
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-example
+          path: build
+          retention-days: 3
