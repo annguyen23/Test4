@@ -28,5 +28,5 @@ jobs:
       
       - name: Check style
         run: | 
-          java -jar checkstyle-8.42-all.jar -c /google_checks.xml src/main/java/edu/uwb/App.java 
+          java -jar jardir/checkstyle-8.42-all.jar -c /google_checks.xml src/main/java/edu/uwb/App.java 
 
