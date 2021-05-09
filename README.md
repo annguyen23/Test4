@@ -32,7 +32,7 @@ Checkstyle action
 ## Checkstyle
 [![Checkstyle Manual Example](https://github.com/PisanA/recipes/actions/workflows/checkstyle-manual.yml/badge.svg)](https://github.com/PisanA/recipes/actions/workflows/checkstyle-manual.yml)
 
-Checkstyle manual, downloading teh jar file and running it from teh command line
+Checkstyle manual, downloading the jar file and running it from the command line
 
 - checkstyle.yml
 - Adder.java
