@@ -1,0 +1,16 @@
+
+name: Checkstyle Manual Example 
+
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    name: CheckstylerM
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Get jar file for checkstyle
+        run: |
+          wget https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.42/checkstyle-8.42-all.jar
+          java -jar checkstyle-8.42-all.jar -c /google_checks.xml src/main/java/edu/uwb/App.java 
+
