@@ -1,4 +1,4 @@
-# Based on https://game.ci/docs/github/getting-started
+
 name: Checkstyle Example 
 
 on:
@@ -10,8 +10,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Setup source for checkstyle
-      - uses: actions/checkout@v2
-      - uses: dbelyaev/action-checkstyle@v0.1.1
+        uses: actions/checkout@v2
+        uses: dbelyaev/action-checkstyle@v0.1.1
         with:
           github_token: ${{ secrets.github_token }}
           # Change reviewdog reporter if you need [github-pr-check, github-check, github-pr-review].
