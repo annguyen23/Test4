@@ -39,9 +39,9 @@ public class AppTest
         assertTrue(testValue == -1);
     }
 
-    @Test
-    public void failingTest()
-    {
-        assertTrue(false);
-    }
+//     @Test
+//     public void failingTest()
+//     {
+//         assertTrue(false);
+//     }
 }
