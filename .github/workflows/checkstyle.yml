@@ -9,24 +9,39 @@ on: [push]
       # this workflow will only run if a .java file is pushed.
      # - '**.java'
 jobs:
-  build:
-    name: Checkstyler
+  go:
+    name: runner / suggester / gofmt
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+      - uses: actions/checkout@v2
+      - run: gofmt -w -s .
+      - uses: reviewdog/action-suggester@v1
         with:
-          java-version: 1.8 
-      - name: Run Google Code Analysis Here  
-        uses: dbelyaev/action-checkstyle@v0.1.1
+          tool_name: gofmt
+  shell:
+    name: runner / suggester / shell
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+      - run: echo ::add-path::$(go env GOPATH)/bin
+      - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+
+      - run: shfmt -i 2 -ci -w .
+      - name: suggester / shfmt
+        uses: reviewdog/action-suggester@v1
         with:
-          github_token: ${{ secrets.github_token }}
-          # Change reviewdog reporter if you need [github-pr-check, github-check, github-pr-review].
-          reporter: github-check
-          # Change reporter level if you need [info,warning,error].
-          # GitHub Status Check won't become failure with a warning.
-          level: warning
-          workdir: src
+          tool_name: shfmt
+
+      # Need to install latest shellcheck to use diff output format as of writing (2020/08/03).
+      - name: install shellcheck
+        run: |
+          scversion="latest"
+          wget -qO- "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv
+          sudo cp "shellcheck-${scversion}/shellcheck" /usr/local/bin/
+          rm -rf "shellcheck-${scversion}/shellcheck"
+      - run: shellcheck -f diff $(shfmt -f .) | patch -p1
+      - name: suggester / shellcheck
+        uses: reviewdog/action-suggester@v1
+        with:
+          tool_name: shellcheck
